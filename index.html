@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEYOND MARINA 保修注册</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      display: grid;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, button {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #success {
+      color: green;
+      text-align: center;
+      font-size: 18px;
+      display: none;
+      margin-top: 20px;
+    }
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>BEYOND MARINA 产品保修注册</h1>
+  
+  <form id="warranty-form">
+    <label>产品型号 / Model：</label>
+    <input type="text" name="model" required placeholder="例如：Kayak Pro 300">
+
+    <label>序列号 / Serial Number：</label>
+    <input type="text" name="serial" required placeholder="产品上的唯一编号">
+
+    <label>购买日期 / Purchase Date：</label>
+    <input type="date" name="purchaseDate" required>
+
+    <label>您的姓名 / Name：</label>
+    <input type="text" name="name" required>
+
+    <label>邮箱 / Email：</label>
+    <input type="email" name="email" required>
+
+    <label>购买渠道 / Purchase Channel：</label>
+    <select name="channel" required>
+      <option value="">请选择</option>
+      <option value="官网">官网</option>
+      <option value="亚马逊">亚马逊</option>
+      <option value="其他电商">其他电商</option>
+      <option value="实体店">实体店</option>
+    </select>
+
+    <button type="submit">提交注册</button>
+  </form>
+
+  <p id="success">注册成功！感谢您的支持，我们已收到您的保修信息。</p>
+
+  <p class="note">注：请确保信息准确，注册后我们将在 24 小时内发送确认邮件。</p>
+
+  <script>
+    document.getElementById('warranty-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // 这里以后可以连接真实后端 API，目前只是演示成功提示
+      document.getElementById('success').style.display = 'block';
+      
+      // 通知父页面（iframe）调整高度
+      const height = document.body.scrollHeight + 20;
+      window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
+    });
+
+    // 页面加载时通知一次高度
+    window.addEventListener('load', function() {
+      const height = document.body.scrollHeight + 20;
+      window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
+    });
+  </script>
+</body>
+</html>
