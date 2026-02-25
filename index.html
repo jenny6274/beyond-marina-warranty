@@ -26,11 +26,12 @@
       color: #111;
     }
     .form-section {
-      background: #ffffff;
+      background: #F7FCFC;  /* 与页面背景统一，浅青灰 */
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
       padding: 40px;
       margin-bottom: 40px;
+      border: 1px solid #e5f0f0;  /* 轻微边框，增加层次 */
     }
     .form-row {
       display: grid;
@@ -69,8 +70,8 @@
     input:focus,
     select:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      border-color: #CB6015;  /* 品牌橙色焦点 */
+      box-shadow: 0 0 0 3px rgba(203, 96, 21, 0.1);
     }
     .checkbox-group {
       display: flex;
@@ -83,7 +84,7 @@
       padding: 16px;
       font-size: 18px;
       font-weight: 600;
-      background: #3b82f6;
+      background: #CB6015;  /* 品牌橙色 */
       color: white;
       border: none;
       border-radius: 8px;
@@ -92,13 +93,13 @@
       margin-top: 20px;
     }
     button:hover {
-      background: #2563eb;
+      background: #A14A10;  /* 深橙 hover 效果 */
     }
     #success, #review-section {
       display: none;
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #065f46;
+      background: #fffaf0;  /* 浅橙背景，与品牌色呼应 */
+      border: 1px solid #f4c7a0;
+      color: #333;
       padding: 20px;
       border-radius: 8px;
       text-align: center;
@@ -111,16 +112,20 @@
     }
     #review-prompt {
       font-size: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+    #submit-review {
+      background: #CB6015;
+      margin-top: 20px;
+    }
+    #submit-review:hover {
+      background: #A14A10;
     }
     .note {
       font-size: 14px;
       color: #6b7280;
       margin-top: 30px;
       text-align: center;
-    }
-    #submit-review {
-      margin-top: 20px;
     }
     @media (max-width: 768px) {
       .form-row {
@@ -477,33 +482,26 @@
   </div>
 
   <script>
-    // 注册表单提交
     document.getElementById('warranty-form').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // 显示注册成功
       document.getElementById('success').style.display = 'block';
 
-      // 显示评价模块（统一上传截图，无跳转）
       document.getElementById('review-section').style.display = 'block';
 
-      // 调整 iframe 高度
       const height = document.body.scrollHeight + 60;
       window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
     });
 
-    // 提交评价截图按钮（前端模拟成功）
     document.getElementById('submit-review').addEventListener('click', function() {
       const screenshotInput = document.getElementById('review-screenshot');
       if (screenshotInput.files.length > 0) {
         alert('Review screenshot submitted successfully! Thank you. Your $10 gift card will be sent to your email within 48 hours.');
-        // 后续可添加真实后端提交（如 Formspree、API 等）
       } else {
         alert('Please upload a screenshot of your review to claim the gift card.');
       }
     });
 
-    // 页面加载调整高度
     window.addEventListener('load', function() {
       const height = document.body.scrollHeight + 60;
       window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
