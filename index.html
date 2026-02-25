@@ -111,15 +111,16 @@
     }
     #review-prompt {
       font-size: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     .note {
       font-size: 14px;
       color: #6b7280;
-      margin-top: 20px;
+      margin-top: 30px;
+      text-align: center;
     }
-    #review-screenshot {
-      margin-top: 15px;
+    #submit-review {
+      margin-top: 20px;
     }
     @media (max-width: 768px) {
       .form-row {
@@ -413,7 +414,7 @@
 
         <div class="form-row">
           <div class="form-field">
-            <label class="required" for="purchasePlatform">Purchase Platform *</label>
+            <label class="required" for="purchasePlatform">Purchase Platform</label>
             <select id="purchasePlatform" name="purchasePlatform" required>
               <option value="">Please select</option>
               <option value="Amazon">Amazon</option>
@@ -426,7 +427,7 @@
             </select>
           </div>
           <div class="form-field">
-            <label class="required" for="orderNumber">Order Number *</label>
+            <label class="required" for="orderNumber">Order Number</label>
             <input type="text" id="orderNumber" name="orderNumber" required>
           </div>
         </div>
@@ -462,13 +463,14 @@
       <p id="review-prompt">We value your feedback! Upload a screenshot of your honest review to claim your gift card.</p>
 
       <!-- 上传评价截图 -->
-      <label for="review-screenshot">Upload Screenshot of Your Review</label>
+      <label for="review-screenshot">Upload Screenshot of Your Review (required for gift card)</label>
       <input type="file" id="review-screenshot" name="review-screenshot" accept="image/*" required>
 
       <button id="submit-review" style="margin-top: 20px;">Submit Review & Claim Gift Card</button>
 
       <p class="note">
         After submitting your screenshot, we will review and send your $10 gift card to your email within 48 hours.<br>
+        Email: <a href="mailto:info@beyondmarina.com">info@beyondmarina.com</a><br>
         Thank you for your support!
       </p>
     </div>
@@ -479,21 +481,23 @@
     document.getElementById('warranty-form').addEventListener('submit', function(e) {
       e.preventDefault();
 
+      // 显示注册成功
       document.getElementById('success').style.display = 'block';
 
-      // 显示评价模块（不再跳转，只上传截图）
+      // 显示评价模块（统一上传截图，无跳转）
       document.getElementById('review-section').style.display = 'block';
 
+      // 调整 iframe 高度
       const height = document.body.scrollHeight + 60;
       window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
     });
 
-    // 提交评价截图按钮（模拟成功）
+    // 提交评价截图按钮（前端模拟成功）
     document.getElementById('submit-review').addEventListener('click', function() {
       const screenshotInput = document.getElementById('review-screenshot');
       if (screenshotInput.files.length > 0) {
-        alert('Review screenshot submitted! Thank you. Your $10 gift card will be sent to your email within 48 hours.');
-        // 这里可以后续添加真实后端提交逻辑（如 Formspree 或 API）
+        alert('Review screenshot submitted successfully! Thank you. Your $10 gift card will be sent to your email within 48 hours.');
+        // 后续可添加真实后端提交（如 Formspree、API 等）
       } else {
         alert('Please upload a screenshot of your review to claim the gift card.');
       }
