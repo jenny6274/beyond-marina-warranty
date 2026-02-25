@@ -1,106 +1,281 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BEYOND MARINA 保修注册</title>
+  <title>BEYOND MARINA Warranty Registration</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #f9f9f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
     h1 {
+      font-size: 32px;
+      font-weight: 600;
       text-align: center;
-      color: #333;
+      margin-bottom: 40px;
+      color: #111;
     }
-    form {
+    .form-section {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+    .form-row {
       display: grid;
-      gap: 15px;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
     }
     label {
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #444;
+    }
+    .required::after {
+      content: "*";               /* 只显示红色 * */
+      color: #e63946;             /* 红色 */
+      margin-left: 4px;
       font-weight: bold;
     }
-    input, select, button {
-      padding: 12px;
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="file"],
+    select {
+      width: 100%;
+      padding: 12px 16px;
       font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
     }
     button {
-      background: #007bff;
+      width: 100%;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      background: #3b82f6;
       color: white;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 20px;
     }
     button:hover {
-      background: #0056b3;
+      background: #2563eb;
     }
     #success {
-      color: green;
-      text-align: center;
-      font-size: 18px;
       display: none;
-      margin-top: 20px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 30px 0;
+    }
+    #review-section {
+      display: none;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      text-align: center;
+    }
+    #review-section h2 {
+      font-size: 28px;
+      color: #111;
+      margin-bottom: 20px;
+    }
+    #review-prompt {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    #review-link {
+      display: inline-block;
+      padding: 16px 40px;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    #review-link:hover {
+      background: #2563eb;
     }
     .note {
       font-size: 14px;
-      color: #666;
-      margin-top: 20px;
+      color: #6b7280;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>BEYOND MARINA 产品保修注册</h1>
-  
-  <form id="warranty-form">
-    <label>产品型号 / Model：</label>
-    <input type="text" name="model" required placeholder="例如：Kayak Pro 300">
+  <div class="container">
+    <h1>Warranty Registration</h1>
 
-    <label>序列号 / Serial Number：</label>
-    <input type="text" name="serial" required placeholder="产品上的唯一编号">
+    <div class="form-section">
+      <form id="warranty-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="required" for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="form-field">
+            <label class="required" for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+        </div>
 
-    <label>购买日期 / Purchase Date：</label>
-    <input type="date" name="purchaseDate" required>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="required" for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-field">
+            <label class="required" for="country">Country / Region</label>
+            <select id="country" name="country" required>
+              <option value="">Please select</option>
+              <!-- 完整国家列表 -->
+              <option value="Afghanistan">Afghanistan</option>
+              <!-- ... 这里省略了完整列表，你可以从之前消息复制进去 ... -->
+              <option value="Zimbabwe">Zimbabwe</option>
+            </select>
+          </div>
+        </div>
 
-    <label>您的姓名 / Name：</label>
-    <input type="text" name="name" required>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address">
+          </div>
+          <div class="form-field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (123) 456-7890">
+          </div>
+        </div>
 
-    <label>邮箱 / Email：</label>
-    <input type="email" name="email" required>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="required" for="purchasePlatform">Purchase Platform</label>
+            <select id="purchasePlatform" name="purchasePlatform" required>
+              <option value="">Please select</option>
+              <option value="Amazon">Amazon</option>
+              <option value="Official Website">Official Website</option>
+              <option value="Offline">Offline</option>
+              <option value="Walmart">Walmart</option>
+              <option value="Wayfair">Wayfair</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="required" for="orderNumber">Order Number</label>
+            <input type="text" id="orderNumber" name="orderNumber" required>
+          </div>
+        </div>
 
-    <label>购买渠道 / Purchase Channel：</label>
-    <select name="channel" required>
-      <option value="">请选择</option>
-      <option value="官网">官网</option>
-      <option value="亚马逊">亚马逊</option>
-      <option value="其他电商">其他电商</option>
-      <option value="实体店">实体店</option>
-    </select>
+        <label class="required">Product Purchased:</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="product" value="Paddle Board" required> Paddle Board</label>
+          <label><input type="checkbox" name="product" value="Inflatable Kayak"> Inflatable Kayak</label>
+          <label><input type="checkbox" name="product" value="Dinghy"> Dinghy</label>
+          <label><input type="checkbox" name="product" value="Efoil"> Efoil</label>
+          <label><input type="checkbox" name="product" value="Cold Plunge"> Cold Plunge</label>
+          <label><input type="checkbox" name="product" value="Hot Tub"> Hot Tub</label>
+          <label><input type="checkbox" name="product" value="Inflatable Dock"> Inflatable Dock</label>
+          <label><input type="checkbox" name="product" value="Others"> Others</label>
+        </div>
 
-    <button type="submit">提交注册</button>
-  </form>
+        <label for="attachment">Attachment</label>
+        <input type="file" id="attachment" name="attachment" accept="image/*,.pdf">
 
-  <p id="success">注册成功！感谢您的支持，我们已收到您的保修信息。</p>
+        <button type="submit">Submit Registration</button>
+      </form>
+    </div>
 
-  <p class="note">注：请确保信息准确，注册后我们将在 24 小时内发送确认邮件。</p>
+    <div id="success">
+      <h2>Registration Successful!</h2>
+      <p>Thank you for registering your warranty. We have received your information.</p>
+    </div>
+
+    <div id="review-section">
+      <h2>Thank You! Leave a Review & Get a $10 Gift Card</h2>
+      <p id="review-prompt">We value your feedback! A quick, honest review helps us improve and supports our brand.</p>
+      <a id="review-link" href="#" target="_blank">Leave Your Review Now</a>
+      <p class="note">
+        After posting your review, please screenshot it and email to <a href="mailto:support@beyondmarina.com">support@beyondmarina.com</a>.<br>
+        We will send your $10 gift card within 48 hours.
+      </p>
+    </div>
+  </div>
 
   <script>
     document.getElementById('warranty-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      // 这里以后可以连接真实后端 API，目前只是演示成功提示
+
       document.getElementById('success').style.display = 'block';
-      
-      // 通知父页面（iframe）调整高度
-      const height = document.body.scrollHeight + 20;
+
+      const platform = document.getElementById('purchasePlatform').value;
+
+      const promptEl = document.getElementById('review-prompt');
+      const linkEl = document.getElementById('review-link');
+
+      if (platform.toLowerCase().includes('amazon')) {
+        promptEl.textContent = 'Since you purchased on Amazon, please visit Amazon.com to leave your review.';
+        linkEl.href = 'https://www.amazon.com';
+        linkEl.textContent = 'Go to Amazon';
+      } else {
+        promptEl.textContent = 'Thank you for your support! Please visit our official website to leave your review.';
+        linkEl.href = 'https://www.beyondmarina.com';
+        linkEl.textContent = 'Go to Website';
+      }
+
+      document.getElementById('review-section').style.display = 'block';
+
+      const height = document.body.scrollHeight + 60;
       window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
     });
 
-    // 页面加载时通知一次高度
     window.addEventListener('load', function() {
-      const height = document.body.scrollHeight + 20;
+      const height = document.body.scrollHeight + 60;
       window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
     });
   </script>
