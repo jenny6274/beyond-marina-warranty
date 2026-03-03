@@ -26,12 +26,12 @@
       color: #111;
     }
     .form-section {
-      background: #F7FCFC;  /* 与页面背景统一，浅青灰 */
+      background: #F7FCFC;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
       padding: 40px;
       margin-bottom: 40px;
-      border: 1px solid #e5f0f0;  /* 轻微边框，增加层次 */
+      border: 1px solid #e5f0f0;
     }
     .form-row {
       display: grid;
@@ -70,7 +70,7 @@
     input:focus,
     select:focus {
       outline: none;
-      border-color: #CB6015;  /* 品牌橙色焦点 */
+      border-color: #CB6015;
       box-shadow: 0 0 0 3px rgba(203, 96, 21, 0.1);
     }
     .checkbox-group {
@@ -84,7 +84,7 @@
       padding: 16px;
       font-size: 18px;
       font-weight: 600;
-      background: #CB6015;  /* 品牌橙色 */
+      background: #CB6015;
       color: white;
       border: none;
       border-radius: 8px;
@@ -93,11 +93,11 @@
       margin-top: 20px;
     }
     button:hover {
-      background: #A14A10;  /* 深橙 hover 效果 */
+      background: #A14A10;
     }
     #success, #review-section {
       display: none;
-      background: #fffaf0;  /* 浅橙背景，与品牌色呼应 */
+      background: #fffaf0;
       border: 1px solid #f4c7a0;
       color: #333;
       padding: 20px;
@@ -127,6 +127,27 @@
       margin-top: 30px;
       text-align: center;
     }
+    .secondary-btn {
+      display: block;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 30px;
+      padding: 14px;
+      font-size: 17px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      background: transparent;
+      color: #CB6015;
+      border: 2px solid #CB6015;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .secondary-btn:hover {
+      background: #CB6015;
+      color: white;
+    }
     @media (max-width: 768px) {
       .form-row {
         grid-template-columns: 1fr;
@@ -138,7 +159,25 @@
   <div class="container">
     <h1>Warranty Registration</h1>
 
-    <div class="form-section">
+<!-- 开头激励欢迎文字 - 左对齐、精简、背景与表单一致、无底部间隙 -->
+<div style="background: #F7FCFC; border: 1px solid #e5f0f0; border-radius: 12px 12px 0 0; padding: 24px; margin-bottom: 0; text-align: left; font-size: 15px; line-height: 1.5; color: #333;">
+  <p style="font-size: 18px; font-weight: 600; margin-bottom: 12px; color: #CB6015;">
+    We're truly glad to have you here!
+  </p>
+  <p>Thank you for choosing BEYOND MARINA and supporting our growing brand.</p>
+  <p>Register your product to activate your warranty and enjoy complete peace of mind.</p>
+  <p style="margin: 16px 0; font-weight: 500;">
+    As a thank you, share a screenshot of your honest review (from Amazon, our site, or elsewhere) after registration, and we'll send you a <span style="color: #CB6015; font-weight: bold;">$10 gift card</span>.
+  </p>
+  <p>Help more adventurers discover our premium paddle boards, kayaks, and more.</p>
+  <p style="font-style: italic; margin-top: 12px; color: #555;">
+    Adventure confidently — your gift card is waiting!
+  </p>
+</div>
+
+ <!-- 紧接着的表单部分，无间隙 -->
+<div class="form-section" style="margin-top: 0; border-top: none; border-radius: 0 0 12px 12px;">
+  <!-- 原表单内容不变 -->
       <form id="warranty-form">
         <div class="form-row">
           <div class="form-field">
@@ -150,7 +189,6 @@
             <input type="text" id="lastName" name="lastName" required>
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-field">
             <label class="required" for="email">Email</label>
@@ -405,7 +443,6 @@
             </select>
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-field">
             <label for="address">Address</label>
@@ -416,7 +453,6 @@
             <input type="tel" id="phone" name="phone" placeholder="+1 (123) 456-7890">
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-field">
             <label class="required" for="purchasePlatform">Purchase Platform</label>
@@ -436,7 +472,6 @@
             <input type="text" id="orderNumber" name="orderNumber" required>
           </div>
         </div>
-
         <label class="required">Product Purchased:</label>
         <div class="checkbox-group">
           <label><input type="checkbox" name="product" value="Paddle Board" required> Paddle Board</label>
@@ -448,10 +483,8 @@
           <label><input type="checkbox" name="product" value="Inflatable Dock"> Inflatable Dock</label>
           <label><input type="checkbox" name="product" value="Others"> Others</label>
         </div>
-
         <label for="attachment">Attachment</label>
         <input type="file" id="attachment" name="attachment" accept="image/*,.pdf">
-
         <button type="submit">Submit Registration</button>
       </form>
     </div>
@@ -462,19 +495,31 @@
       <p>Thank you for registering your warranty. We have received your information.</p>
     </div>
 
-    <!-- 评价激励模块（提交注册后显示） -->
+    <!-- 评价激励模块 -->
     <div id="review-section">
       <h2>Thank You! Leave a Review & Get a $10 Gift Card</h2>
-      <p id="review-prompt">We value your feedback! Upload a screenshot of your honest review to claim your gift card.</p>
+      <p id="review-prompt">We truly value your feedback! Upload a screenshot of your honest review to claim your gift card.</p>
 
-      <!-- 上传评价截图 -->
+      <!-- Amazon 跳转按钮（放在上传上方，作为第一步） -->
+      <p style="text-align: center; margin: 20px 0 10px; font-size: 15px; color: #666;">
+        Step 1: Share your experience on Amazon
+      </p>
+      <a href="https://www.amazon.com" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="secondary-btn">
+        Go to Amazon to Leave Your Honest Review →
+      </a>
+
+      <!-- 上传部分 -->
       <label for="review-screenshot">Upload Screenshot of Your Review (required for gift card)</label>
       <input type="file" id="review-screenshot" name="review-screenshot" accept="image/*" required>
 
-      <button id="submit-review" style="margin-top: 20px;">Submit Review & Claim Gift Card</button>
+      <!-- 主提交按钮 -->
+      <button id="submit-review">Submit Review & Claim Gift Card</button>
 
       <p class="note">
-        After submitting your screenshot, we will review and send your $10 gift card to your email within 48 hours.<br>
+        After we review your screenshot, we'll send your $10 gift card to your email within 48 hours.<br>
         Email: <a href="mailto:info@beyondmarina.com">info@beyondmarina.com</a><br>
         Thank you for your support!
       </p>
@@ -484,11 +529,8 @@
   <script>
     document.getElementById('warranty-form').addEventListener('submit', function(e) {
       e.preventDefault();
-
       document.getElementById('success').style.display = 'block';
-
       document.getElementById('review-section').style.display = 'block';
-
       const height = document.body.scrollHeight + 60;
       window.parent.postMessage({ type: 'bm-warranty-resize', height: height }, '*');
     });
